@@ -1,0 +1,67 @@
+{
+
+    "manifest_version": 2,
+    "name": "Google Play Music Keys",
+    "version": "1.0",
+  
+    "description": "While Google Play Music is open, your keyboard media shortcut keys can be used to play, pause and skip in Google Play Music.",
+    "icons": {
+      "48": "icons/GPM-48.png"
+    },
+  
+    "permissions": ["*://play.google.com/music/listen*", "tabs"],
+  
+    "browser_action": {
+      "browser_style": true,
+      "default_icon": {
+        "128": "icons/PlayMusicTriangle.png"
+      },
+      "default_title": "Google Play Music Keys"
+    },
+    
+    "background": {
+      "scripts": ["scripts/background.js"]
+    },
+
+    "commands": {
+      "toggle_play_pause_media": {
+        "suggested_key": {
+          "default": "MediaPlayPause"
+        },
+        "description": "Toggle whether Google Play Music plays music"
+      },
+      "toggle_play_pause_up": {
+        "suggested_key": {
+          "default": "Ctrl+Up"
+        },
+        "description": "Toggle whether Google Play Music plays music"
+      },
+      "toggle_play_pause_down": {
+        "suggested_key": {
+          "default": "Ctrl+Down"
+        },
+        "description": "Toggle whether Google Play Music plays music"
+      },
+      "skip_next": {
+        "suggested_key": {
+          "default": "Ctrl+Right"
+        },
+        "description": "Skip to the next song"
+      },
+      "skip_prev": {
+        "suggested_key": {
+          "default": "Ctrl+Left"
+        },
+        "description": "Return to the previous song"
+      }
+    },
+
+    "content_scripts": [
+      {
+          "matches": ["*://play.google.com/music/listen*"],
+          "js": ["scripts/google-music.min.js", "scripts/GPM_message_handler.js"],
+          "all_frames" : false,
+          "run_at": "document_idle"
+      }
+  ]
+}
